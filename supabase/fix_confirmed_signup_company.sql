@@ -1,6 +1,8 @@
 -- PetFlow: provisiona empresa e vínculo somente após a confirmação do e-mail.
 -- Também recupera usuários já confirmados que ficaram sem empresa.
 
+alter table public.companies add column if not exists phone text;
+
 create or replace function public.petflow_provision_user(
   p_user_id uuid,
   p_email text,
@@ -15,6 +17,7 @@ declare
   v_company_id public.companies.id%type;
   v_company_name text := nullif(trim(coalesce(p_metadata ->> 'company_name', '')), '');
   v_invite_code text := nullif(trim(coalesce(p_metadata ->> 'invite_code', '')), '');
+  v_phone text := nullif(trim(coalesce(p_metadata ->> 'phone', '')), '');
   v_full_name text := coalesce(
     nullif(trim(coalesce(p_metadata ->> 'full_name', '')), ''),
     split_part(coalesce(p_email, 'Usuário'), '@', 1)
@@ -59,6 +62,7 @@ begin
 
   insert into public.companies (
     name,
+    phone,
     invite_code,
     active,
     monthly_fee,
@@ -70,6 +74,7 @@ begin
   )
   values (
     v_company_name,
+    v_phone,
     upper(substr(md5(random()::text || p_user_id::text || clock_timestamp()::text), 1, 8)),
     true,
     0,
