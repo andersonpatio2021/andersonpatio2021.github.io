@@ -36,3 +36,8 @@
 .sidebar nav button,.sidebar nav button:not(.active),.sidebar nav button.active{padding:7px 9px;font-size:9px}
 .content{padding:14px 10px 28px}
 }
+
+/* PetFlow: execução do atendimento e baixa financeira */
+.appointment-settlement{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.appointment-settlement select{color:var(--navy);background:#fff;border:1px solid #dfe3eb;border-radius:9px;min-width:145px;padding:8px 9px;font:inherit;font-size:9px}.execute-btn{color:#fff;cursor:pointer;background:#2f9a74;border:0;border-radius:9px;padding:8px 11px;font-size:9px;font-weight:800}.execute-btn:hover{background:#278362}.appointment-paid{color:#298565!important;margin-top:5px;font-size:9px;font-weight:800;display:block}.finance-row strong{min-width:0;overflow-wrap:anywhere}
+@media (width<=600px){.record .appointment-settlement{order:4;width:100%}.appointment-settlement select{flex:1;min-width:0}.appointment-settlement .execute-btn{flex:0 0 auto}.record>.danger-btn{margin-left:auto}.finance-row{grid-template-columns:1.4fr 1fr .8fr}}
+@media (width<=400px){.appointment-settlement{align-items:stretch;flex-direction:column}.appointment-settlement .execute-btn{width:100%}.finance-row{grid-template-columns:1.3fr 1fr}.finance-row>:nth-child(3){display:none}}
